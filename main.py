@@ -4,8 +4,10 @@ pygame.init()
 width = 900
 height = 500
 screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Pong by Xander")
 
 white = (255,255,255)
+black = (0,0,0)
 
 running = True
 while running:
@@ -13,7 +15,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
             sys.exit()
-    screen.fill(white)
+    screen.fill(black)
     pygame.display.flip()
 
 pygame.quit()
