@@ -42,7 +42,7 @@ ballr = 10
 balld = 0
 ballw = 10
 ballhb = pygame.Rect(ballx-ballr, bally-ballr, ballr*2, ballr*2)
-pballs = 5
+pballs = 2
 
 p1yd10 = p1.y*10
 p2yd10 = p2.y*10
@@ -102,10 +102,10 @@ while running:
     screen.fill(black)
     pygame.draw.rect(screen, white, p1)
     pygame.draw.rect(screen, white, p2)
-    pygame.draw.rect(screen, (255,0,0), ballhb)
+    #pygame.draw.rect(screen, (255,0,0), ballhb)
     pygame.draw.circle(screen, (255,255,255), (ballx, bally), ballr, ballw)
     pygame.display.flip()
-    print(f"Player 1 points: {p1p}, Player 2 points: {p2p}\nballd: {balld}, mx, my: {mx}, {my}")
+    print(f"Player 1 points: {p1p}, Player 2 points: {p2p}")#"\nballd: {balld}, mx, my: {mx}, {my}")
     #clock.tick(fps)
 
 pygame.quit()
