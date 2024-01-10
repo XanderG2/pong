@@ -8,6 +8,11 @@ def calculate_movement(degrees):
     y = math.sin(radians)
     return x, y
 
+def calculate_angle(x, y):
+    radians = math.atan2(y, x)
+    degrees = math.degrees(radians)
+    return degrees
+
 
 width = 900
 height = 500
@@ -37,6 +42,7 @@ ballr = 10
 balld = 0
 ballw = 10
 ballhb = pygame.Rect(ballx-ballr, bally-ballr, ballr*2, ballr*2)
+pballs = 5
 
 p1yd10 = p1.y*10
 p2yd10 = p2.y*10
@@ -50,28 +56,36 @@ while running:
     keys = pygame.key.get_pressed()
     if keys:
         if keys[pygame.K_UP] and p2.y > 0:
-            p2yd10 -= 1
+            p2yd10 -= pballs
         if keys[pygame.K_DOWN] and p2.y < height-p2.height:
-            p2yd10 += 1
+            p2yd10 += pballs
         if keys[pygame.K_w] and p1.y > 0:
-            p1yd10 -= 1
+            p1yd10 -= pballs
         if keys[pygame.K_s] and p1.y < height-p1.height:
-            p1yd10 += 1
+            p1yd10 += pballs
     p1.y = p1yd10//10
     p2.y = p2yd10//10
     if ballhb.colliderect(p1):
-        p1m = ph//2
-        dfm = p1m-bally
-        balld = 0 + dfm
-        if balld < 0:
-            balld = 0+abs(balld)
+        dfm = bally - p1.centery
+        my = dfm//10
+        if my < 0.5:
+            my = 0.5
+        if mx > -0.5:
+            mx = -0.5
+        mx = -mx
+        balld = calculate_angle(mx, my)
     if ballhb.colliderect(p2):
-        p2m = ph//2
-        dfm = p2m-bally
-        balld = 180 + dfm
+        dfm = bally - p2.centery
+        my = dfm//10
+        if my < 0.5:
+            my = 0.5
+        if mx < 0.5:
+            mx = 0.5
+        mx = -mx
+        balld = calculate_angle(mx, my)
     if bally == 0 or bally == height-ballr:
         balld = 360 - balld
-    mx, my = calculate_movement(balld)
+    mx, my = [x*pballs for x in calculate_movement(balld)]
     ballxd10 += mx
     ballyd10 += my
     if ballx == 0:
@@ -91,7 +105,7 @@ while running:
     pygame.draw.rect(screen, (255,0,0), ballhb)
     pygame.draw.circle(screen, (255,255,255), (ballx, bally), ballr, ballw)
     pygame.display.flip()
-    print(f"Player 1 points: {p1p}, Player 2 points: {p2p}")
+    print(f"Player 1 points: {p1p}, Player 2 points: {p2p}\nballd: {balld}, mx, my: {mx}, {my}")
     #clock.tick(fps)
 
 pygame.quit()
