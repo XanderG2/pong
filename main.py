@@ -13,6 +13,8 @@ width = 900
 height = 500
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Pong by Xander")
+fps = 60
+clock = pygame.time.Clock()
 
 white = (255,255,255)
 black = (0,0,0)
@@ -58,9 +60,15 @@ while running:
     p1.y = p1yd10//10
     p2.y = p2yd10//10
     if ballhb.colliderect(p1):
-        balld = random.choice([random.randint(0,90), random.randint(270, 359)])
+        p1m = ph//2
+        dfm = p1m-bally
+        balld = 0 + dfm
+        if balld < 0:
+            balld = 0+abs(balld)
     if ballhb.colliderect(p2):
-        balld = random.randint(91, 269)
+        p2m = ph//2
+        dfm = p2m-bally
+        balld = 180 + dfm
     if bally == 0 or bally == height-ballr:
         balld = 360 - balld
     mx, my = calculate_movement(balld)
@@ -84,5 +92,6 @@ while running:
     pygame.draw.circle(screen, (255,255,255), (ballx, bally), ballr, ballw)
     pygame.display.flip()
     print(f"Player 1 points: {p1p}, Player 2 points: {p2p}")
+    clock.tick(fps)
 
 pygame.quit()
