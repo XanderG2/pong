@@ -1,4 +1,4 @@
-import pygame, sys, random, math
+import pygame, sys, math
 pygame.init()
 
 
@@ -18,8 +18,6 @@ width = 900
 height = 500
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Pong by Xander")
-#fps = 60
-#clock = pygame.time.Clock()
 
 white = (255,255,255)
 black = (0,0,0)
@@ -102,10 +100,8 @@ while running:
     screen.fill(black)
     pygame.draw.rect(screen, white, p1)
     pygame.draw.rect(screen, white, p2)
-    #pygame.draw.rect(screen, (255,0,0), ballhb)
     pygame.draw.circle(screen, (255,255,255), (ballx, bally), ballr, ballw)
     pygame.display.flip()
-    print(f"Player 1 points: {p1p}, Player 2 points: {p2p}")#"\nballd: {balld}, mx, my: {mx}, {my}")
-    #clock.tick(fps)
+    print(f"Player 1 points: {p1p}, Player 2 points: {p2p}")
 
 pygame.quit()
