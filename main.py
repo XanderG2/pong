@@ -13,8 +13,8 @@ width = 900
 height = 500
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Pong by Xander")
-fps = 60
-clock = pygame.time.Clock()
+#fps = 60
+#clock = pygame.time.Clock()
 
 white = (255,255,255)
 black = (0,0,0)
@@ -92,6 +92,6 @@ while running:
     pygame.draw.circle(screen, (255,255,255), (ballx, bally), ballr, ballw)
     pygame.display.flip()
     print(f"Player 1 points: {p1p}, Player 2 points: {p2p}")
-    clock.tick(fps)
+    #clock.tick(fps)
 
 pygame.quit()
